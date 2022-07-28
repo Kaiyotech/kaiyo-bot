@@ -275,7 +275,7 @@ class ZeroSumReward(RewardFunction):
         player_rewards[mid:] -= blue_mean
 
         self.last_state = state
-        self.rewards = player_rewards + player_self_rewards
+        self.rewards = [a + b for a, b in zip(player_rewards, player_self_rewards)]
         # print(self.rewards)
 
     def reset(self, initial_state: GameState):
