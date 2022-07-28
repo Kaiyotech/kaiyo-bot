@@ -16,7 +16,7 @@ def _closest_to_ball(state: GameState) -> Tuple[int, int]:
     blue_closest = -1
     orange_closest = -1
     for i, player in enumerate(state.players):
-        dist = np.linalg.norm((a - b for a, b in zip(player.car_data.position, state.ball.position)))
+        dist = np.linalg.norm([a - b for a, b in zip(player.car_data.position, state.ball.position)])
         dist_list[i] = dist
         if state.players[i].team_num == BLUE_TEAM and blue_closest == -1:
             blue_closest = i
@@ -148,8 +148,8 @@ class ZeroSumReward(RewardFunction):
                 #     player_self_rewards[i] += self.ball_touch_dribble_w
 
                 # acel_ball
-                vel_difference = abs(np.linalg.norm((a - b for a, b in zip(self.last_state.ball.linear_velocity,
-                                                                          self.current_state.ball.linear_velocity))))
+                vel_difference = abs(np.linalg.norm([a - b for a, b in zip(self.last_state.ball.linear_velocity,
+                                                                          self.current_state.ball.linear_velocity)]))
                 player_rewards[i] += vel_difference / 4600.0
 
                 # jump touch
@@ -182,9 +182,9 @@ class ZeroSumReward(RewardFunction):
                 else:
                     objective = BLUE_GOAL_BACK
                 vel = state.ball.linear_velocity
-                pos_diff = (a - b for a, b in zip(objective, state.ball.position))
-                norm_pos_diff = (a / b for a, b in zip(pos_diff, np.linalg.norm(pos_diff)))
-                norm_vel = (a / b for a, b in zip(vel, BALL_MAX_SPEED))
+                pos_diff = [a - b for a, b in zip(objective, state.ball.position)]
+                norm_pos_diff = [a / np.linalg.norm(pos_diff) for a in pos_diff]
+                norm_vel = [a / BALL_MAX_SPEED for a in vel]
                 vel_bg_reward = float(np.dot(norm_pos_diff, norm_vel))
                 player_rewards[i] += self.velocity_bg_w * vel_bg_reward
 
