@@ -105,7 +105,7 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("kaiyo-bot/KaiBumBot_1659020392.132971/KaiBumBot_7660/checkpoint.pt")
+    alg.load("kaiyo-bot/KaiBumBot_1659151135.6592612/KaiBumBot_8440/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 

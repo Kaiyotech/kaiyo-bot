@@ -23,7 +23,7 @@ class KaiyoSetter(DynamicGMSetter):
                         AugmentSetter(RandomState(cars_on_ground=True)),
                         AugmentSetter(RandomState(cars_on_ground=False)),
                     ),
-                    (0.1, 0.70, 0.05, 0.05, 0.05, 0.05)
+                    (0.1, 0.60, 0.05, 0.15, 0.05, 0.05)
                 )
             )
 

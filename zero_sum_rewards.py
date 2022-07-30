@@ -70,14 +70,14 @@ class ZeroSumReward(RewardFunction):
         # touch_grass_w=0,
         acel_ball_w=0.1,
         boost_gain_w=1,  # 1.5 -> 0.5 at 7.18b, was maybe 1 originally?
-        boost_spend_w=0.025,  # 0.033 -> 0.025 7.18b
+        boost_spend_w=0.033,  # 0.033 -> 0.025 7.18b, 0.025 -> 0.033 8.44b
         # ball_touch_dribble_w=0,
-        jump_touch_w=2,
+        jump_touch_w=3,  # 2 -> 3 at 8.44b
         # wall_touch_w=0,
-        cons_air_touches_w=5,
+        cons_air_touches_w=8,  # 5 -> 8 at 8.44b
         demo_w=4,  # 3->4 at 6.87b
         # got_demoed_w=0,
-        kickoff_w=0.05,
+        kickoff_w=0.1,  # 0.05 -> 0.1 at 8.44b
         tick_skip=8,
         team_spirit=1,
     ):
