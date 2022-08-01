@@ -14,6 +14,7 @@ from N_Parser import NectoAction
 import numpy as np
 # from kaiyo_rewards import KaiyoRewards
 from zero_sum_rewards import ZeroSumReward
+from Constants import FRAME_SKIP
 
 import os
 from torch import set_num_threads
@@ -23,7 +24,7 @@ from rocket_learn.utils.stat_trackers.common_trackers import Speed, Demos, Timeo
 set_num_threads(1)
 
 if __name__ == "__main__":
-    frame_skip = 8
+    frame_skip = FRAME_SKIP
     half_life_seconds = 8
     fps = 120 / frame_skip
     gamma = np.exp(np.log(0.5) / (fps * half_life_seconds))
@@ -105,7 +106,7 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("kaiyo-bot/KaiBumBot_1659151135.6592612/KaiBumBot_8440/checkpoint.pt")
+    alg.load("kaiyo-bot/KaiBumBot_1659318312.718795/KaiBumBot_9360/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 

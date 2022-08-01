@@ -9,6 +9,7 @@ from rlgym_tools.extra_action_parsers.kbm_act import KBMAction
 
 
 class NectoAction(ActionParser):
+    # necto parser courtesy of Rolv/Soren (https://github.com/Rolv-Arild/Necto/blob/master/training/parser.py)
     def __init__(self):
         super().__init__()
         self._lookup_table = self.make_lookup_table()

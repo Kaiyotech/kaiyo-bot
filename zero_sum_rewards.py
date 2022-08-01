@@ -3,6 +3,7 @@ from rlgym.utils.common_values import BLUE_TEAM, BLUE_GOAL_BACK, ORANGE_GOAL_BAC
 from rlgym.utils.reward_functions.common_rewards.misc_rewards import *
 from rlgym.utils.reward_functions.common_rewards.conditional_rewards import *
 from rlgym.utils.reward_functions import RewardFunction
+from Constants import FRAME_SKIP
 
 from numpy.linalg import norm
 
@@ -56,7 +57,7 @@ def _closest_to_ball(state: GameState) -> Tuple[int, int]:
 
 
 class ZeroSumReward(RewardFunction):
-
+    # framework for zerosum comes from Nexto code (Rolv and Soren) (https://github.com/Rolv-Arild/Necto/blob/master/training/reward.py)
     def __init__(
         self,
         goal_w=10,
@@ -69,16 +70,16 @@ class ZeroSumReward(RewardFunction):
         # ball_touch_w=0,
         # touch_grass_w=0,
         acel_ball_w=0.1,
-        boost_gain_w=1,  # 1.5 -> 0.5 at 7.18b, was maybe 1 originally?
+        boost_gain_w=0.5,  # 1.5 -> 1? at 7.18b, was maybe 1 originally? -> 0.5 at 9.36b
         boost_spend_w=0.033,  # 0.033 -> 0.025 7.18b, 0.025 -> 0.033 8.44b
         # ball_touch_dribble_w=0,
         jump_touch_w=3,  # 2 -> 3 at 8.44b
         # wall_touch_w=0,
         cons_air_touches_w=8,  # 5 -> 8 at 8.44b
-        demo_w=4,  # 3->4 at 6.87b
+        demo_w=6,  # 3->4 at 6.87b -> 6 at 9.36b
         # got_demoed_w=0,
         kickoff_w=0.1,  # 0.05 -> 0.1 at 8.44b
-        tick_skip=8,
+        tick_skip=FRAME_SKIP,
         team_spirit=1,
     ):
         self.goal_w = goal_w

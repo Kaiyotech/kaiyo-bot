@@ -13,13 +13,14 @@ from N_Parser import NectoAction
 from zero_sum_rewards import ZeroSumReward
 from pretrained_agents.necto.necto_v1 import NectoV1
 from torch import set_num_threads
+from Constants import FRAME_SKIP
 import os
 set_num_threads(1)
 
 
 if __name__ == "__main__":
     rew = ZeroSumReward()
-    frame_skip = 8
+    frame_skip = FRAME_SKIP
     fps = 120 // frame_skip
     name = "Default"
     send_gamestate = False
