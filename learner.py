@@ -18,8 +18,7 @@ from Constants import FRAME_SKIP
 import os
 from torch import set_num_threads
 from rocket_learn.utils.stat_trackers.common_trackers import Speed, Demos, TimeoutRate, Touch, EpisodeLength, Boost, \
-    BehindBall, TouchHeight, DistToBall
-from mybots_trackers import AirTouch, AirTouchHeight
+    BehindBall, TouchHeight, DistToBall, AirTouch, AirTouchHeight, BallHeight, BallSpeed
 
 set_num_threads(1)
 
@@ -57,7 +56,7 @@ if __name__ == "__main__":
 
     stat_trackers = [
         Speed(), Demos(), TimeoutRate(), Touch(), EpisodeLength(), Boost(), BehindBall(), TouchHeight(), DistToBall(),
-        AirTouch(), AirTouchHeight(),
+        AirTouch(), AirTouchHeight(), BallHeight(), BallSpeed(),
     ]
     rollout_gen = RedisRolloutGenerator("KaiBumBot",
                                         redis,
@@ -70,7 +69,7 @@ if __name__ == "__main__":
                                         clear=False,
                                         stat_trackers=stat_trackers,
                                         # gamemodes=("1v1", "2v2", "3v3"),
-                                        max_age=0,
+                                        max_age=1,
                                         )
 
     critic = Sequential(Linear(237, 512), GELU(), Linear(512, 512), GELU(),
@@ -107,11 +106,11 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("kaiyo-bot/KaiBumBot_1660270979.5956304/KaiBumBot_13610/checkpoint.pt")
+    alg.load("model_saves/KaiBumBot_1660526486.306023/KaiBumBot_14140/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 
-    alg.run(iterations_per_save=logger.config.save_every, save_dir="kaiyo-bot")
+    alg.run(iterations_per_save=logger.config.save_every, save_dir="model_saves")
 
 
 
