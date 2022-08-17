@@ -18,7 +18,7 @@ from Constants import FRAME_SKIP
 import os
 from torch import set_num_threads
 from rocket_learn.utils.stat_trackers.common_trackers import Speed, Demos, TimeoutRate, Touch, EpisodeLength, Boost, \
-    BehindBall, TouchHeight, DistToBall, AirTouch, AirTouchHeight, BallHeight, BallSpeed
+    BehindBall, TouchHeight, DistToBall, AirTouch, AirTouchHeight, BallHeight, BallSpeed, CarOnGround
 
 set_num_threads(1)
 
@@ -56,8 +56,9 @@ if __name__ == "__main__":
 
     stat_trackers = [
         Speed(), Demos(), TimeoutRate(), Touch(), EpisodeLength(), Boost(), BehindBall(), TouchHeight(), DistToBall(),
-        AirTouch(), AirTouchHeight(), BallHeight(), BallSpeed(),
+        AirTouch(), AirTouchHeight(), BallHeight(), BallSpeed(), CarOnGround(),
     ]
+
     rollout_gen = RedisRolloutGenerator("KaiBumBot",
                                         redis,
                                         lambda: AdvancedObsPadder(team_size=3, expanding=True),
@@ -106,7 +107,7 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("model_saves/KaiBumBot_1660526486.306023/KaiBumBot_14140/checkpoint.pt")
+    alg.load("model_saves/KaiBumBot_1660701882.451209/KaiBumBot_14600/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 

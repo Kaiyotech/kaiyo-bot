@@ -25,7 +25,9 @@ if __name__ == "__main__":
     fps = 120 // frame_skip
     name = "Default"
     send_gamestate = False
+    streamer_mode = False
     local = True
+    auto_minimize = True
     host = "127.0.0.1"
     if len(sys.argv) > 1:
         host = sys.argv[1]
@@ -36,6 +38,12 @@ if __name__ == "__main__":
     if len(sys.argv) > 3:
         if sys.argv[3] == 'GAMESTATE':
             send_gamestate = True
+        elif sys.argv[3] == 'STREAMER':
+            streamer_mode = True
+            past_version_prob = 0.2
+            evaluation_prob = 0
+            game_speed = 1
+            auto_minimize = False
 
     match = Match(
         game_speed=100,
@@ -79,10 +87,11 @@ if __name__ == "__main__":
                        force_paging=True,
                        dynamic_gm=True,
                        send_obs=True,
-                       auto_minimize=True,
+                       auto_minimize=auto_minimize,
                        send_gamestates=send_gamestate,
                        # pretrained_agents=pretrained_agents,
                        gamemode_weights=None,  # {'1v1': 0.3, '2v2': 0.25, '3v3': 0.45}  # testing weights
+                       streamer_mode=streamer_mode,
                        ).run()
 
 
