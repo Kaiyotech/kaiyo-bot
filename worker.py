@@ -28,6 +28,9 @@ if __name__ == "__main__":
     streamer_mode = False
     local = True
     auto_minimize = True
+    game_speed = 100
+    evaluation_prob = 0.01
+    past_version_prob = 0.2
     host = "127.0.0.1"
     if len(sys.argv) > 1:
         host = sys.argv[1]
@@ -46,7 +49,7 @@ if __name__ == "__main__":
             auto_minimize = False
 
     match = Match(
-        game_speed=100,
+        game_speed=game_speed,
         spawn_opponents=True,
         team_size=3,
         state_setter=KaiyoSetter(),
@@ -81,9 +84,9 @@ if __name__ == "__main__":
     # pretrained_agents = {nectov1: 0, nexto: 0.70}
 
     RedisRolloutWorker(r, name, match,
-                       past_version_prob=0.2,
+                       past_version_prob=past_version_prob,
                        sigma_target=2,
-                       evaluation_prob=0.01,
+                       evaluation_prob=evaluation_prob,
                        force_paging=True,
                        dynamic_gm=True,
                        send_obs=True,
