@@ -7,7 +7,6 @@ from rlgym.utils.common_values import BOOST_LOCATIONS, BLUE_TEAM, ORANGE_TEAM
 from rlgym.utils.gamestates import GameState, PlayerData
 
 
-
 class NectoV1Obs(ObsBuilder):
     _boost_locations = np.array(BOOST_LOCATIONS)
     _invert = np.array([1] * 5 + [-1, -1, 1] * 5 + [1] * 4)
