@@ -31,6 +31,8 @@ if __name__ == "__main__":
     game_speed = 100
     evaluation_prob = 0.01
     past_version_prob = 0.15
+    deterministic_streamer = True
+    force_old_deterministic = True
     host = "127.0.0.1"
     if len(sys.argv) > 1:
         host = sys.argv[1]
@@ -45,6 +47,7 @@ if __name__ == "__main__":
             streamer_mode = True
             evaluation_prob = 0
             game_speed = 1
+            deterministic_streamer = True
             auto_minimize = False
 
     match = Match(
@@ -94,6 +97,8 @@ if __name__ == "__main__":
                        pretrained_agents=pretrained_agents,
                        gamemode_weights=None,  # {'1v1': 0.3, '2v2': 0.25, '3v3': 0.45}  # testing weights
                        streamer_mode=streamer_mode,
+                       deterministic_streamer=deterministic_streamer,
+                       force_old_deterministic=force_old_deterministic,
                        ).run()
 
 
