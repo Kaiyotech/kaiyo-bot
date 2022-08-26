@@ -58,7 +58,8 @@ if __name__ == "__main__":
         obs_builder=AdvancedObsPadder(team_size=3, expanding=True),
         action_parser=NectoAction(),
         terminal_conditions=[TimeoutCondition(fps * 300), NoTouchTimeoutCondition(fps * 45), GoalScoredCondition()],
-        reward_function=rew
+        reward_function=rew,
+        tick_skip=frame_skip,
     )
 
     # local Redis

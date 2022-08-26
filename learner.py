@@ -25,12 +25,12 @@ set_num_threads(1)
 
 if __name__ == "__main__":
     frame_skip = FRAME_SKIP
-    half_life_seconds = 12  # 8 -> 12 at 12.53b
+    half_life_seconds = 20  # 8 -> 12 -> 20 at like 20b to fix tick skip
     fps = 120 / frame_skip
     gamma = np.exp(np.log(0.5) / (fps * half_life_seconds))
     print(f"_gamma is: {gamma}")
     config = dict(
-        actor_lr=1e-5,
+        actor_lr=0,  # freezing
         critic_lr=1e-5,
 
         n_steps=2_000_000,  # polishing at 13.1b
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("model_saves/KaiBumBot_1661222890.2305462/KaiBumBot_15910/checkpoint.pt")
+    alg.load("model_saves/KaiBumBot_1661525230.4867115/KaiBumBot_16460/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 
