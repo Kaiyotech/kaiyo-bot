@@ -30,7 +30,7 @@ if __name__ == "__main__":
     gamma = np.exp(np.log(0.5) / (fps * half_life_seconds))
     print(f"_gamma is: {gamma}")
     config = dict(
-        actor_lr=0,  # freezing
+        actor_lr=1e-5,
         critic_lr=1e-5,
 
         n_steps=2_000_000,  # polishing at 13.1b
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         zero_grads_with_none=True,
     )
 
-    alg.load("model_saves/KaiBumBot_1661525230.4867115/KaiBumBot_16460/checkpoint.pt")
+    alg.load("model_saves/KaiBumBot_1661566621.4805343/KaiBumBot_16635/checkpoint.pt")
     alg.agent.optimizer.param_groups[0]["lr"] = logger.config.actor_lr
     alg.agent.optimizer.param_groups[1]["lr"] = logger.config.critic_lr
 
