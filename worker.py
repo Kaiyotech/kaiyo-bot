@@ -30,7 +30,7 @@ if __name__ == "__main__":
     auto_minimize = True
     game_speed = 100
     evaluation_prob = 0.01
-    past_version_prob = 0.15
+    past_version_prob = 0.1
     deterministic_streamer = True
     force_old_deterministic = True
     host = "127.0.0.1"
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     model_name = "nexto-model.pt"
     nexto = NextoV2(model_string=model_name, n_players=6)
 
-    pretrained_agents = {nectov1: 0.025, nexto: 0.075}
+    pretrained_agents = {nectov1: 0, nexto: 0.1}
 
     RedisRolloutWorker(r, name, match,
                        past_version_prob=past_version_prob,
