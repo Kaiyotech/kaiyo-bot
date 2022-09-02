@@ -84,7 +84,7 @@ if __name__ == "__main__":
     model_name = "nexto-model.pt"
     nexto = NextoV2(model_string=model_name, n_players=6)
 
-    pretrained_agents = {nectov1: 0, nexto: 0.1}
+    pretrained_agents = {nectov1: 0, nexto: 0}
 
     RedisRolloutWorker(r, name, match,
                        past_version_prob=past_version_prob,
@@ -95,7 +95,7 @@ if __name__ == "__main__":
                        send_obs=True,
                        auto_minimize=auto_minimize,
                        send_gamestates=send_gamestate,
-                       pretrained_agents=pretrained_agents,
+                       # pretrained_agents=pretrained_agents,
                        gamemode_weights=None,  # {'1v1': 0.3, '2v2': 0.25, '3v3': 0.45}  # testing weights
                        streamer_mode=streamer_mode,
                        deterministic_streamer=deterministic_streamer,
